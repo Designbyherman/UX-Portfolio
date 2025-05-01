@@ -1,0 +1,3187 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ACC Course Evaluation Guide Case Study | UX Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Base Styles ===== */
+        :root {
+    /* Font families */
+    --font-heading: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+--font-mono: 'IBM Plex Mono', monospace;
+    
+    /* Font sizes */
+    --font-size-xxxl: 4rem;      /* 64px - H1 */
+    --font-size-xxl: 2.67rem;    /* 42.7px - H2 */
+    --font-size-xl: 1.78rem;     /* 28.5px - H3 */
+    --font-size-lg: 1.33rem;     /* 21.3px - H4 */
+    --font-size-md: 1rem;        /* 16px - Body text */
+    --font-size-sm: 0.875rem;    /* 14px - Small text */
+    
+    /* Spacing */
+    --space-xs: 0.5rem;       /* 8px */
+    --space-sm: 1rem;         /* 16px */
+    --space-md: 1.5rem;       /* 24px */
+    --space-lg: 2rem;         /* 32px */
+    --space-xl: 3rem;         /* 48px */
+    
+    /* Radius */
+    --radius-sm: 0.5rem;      /* 8px */
+    --radius-md: 0.75rem;     /* 12px */
+    --radius-lg: 1rem;        /* 16px */
+    
+    /* Transitions */
+    --transition-fast: 0.2s;
+    --transition-normal: 0.3s;
+    
+    /* Keep original variables */
+    --underline-speed: 0.3s;
+    --animation-duration: 16s;
+    --easing: cubic-bezier(0.4, 0, 0.2, 1);
+    --text-color: var(--color-text-primary);
+
+  --fs-h1: clamp(2rem, 5vw, 3.5rem);
+  --fs-h2: clamp(1.5rem, 3vw, 2.67rem);
+  --fs-h3: clamp(1.2rem, 2vw, 1.78rem);
+  --fs-body: clamp(0.9rem, 1vw, 1rem);
+}
+/* ===== Metadata Labels ===== */
+.metadata-label {
+    font-family: var(--font-heading);       /* Jakarta for all labels */
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-label);  /* dynamic per theme */
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-label);         /* dynamic per theme */
+  margin-bottom: var(--space-xs);
+}
+
+/* Add these theme color definitions */
+/* Light Theme */
+.light-theme {
+    /* Backgrounds */
+    --color-bg-primary:   #FAFAFA;
+  --color-bg-secondary: #F5F5F5;
+  --color-bg-tertiary:  #F1F3F5;
+    
+    /* Text */
+    --color-text-primary: #111827;
+    --color-text-secondary: #4B5563;
+    --color-text-accent: #0284C7;
+    --color-text-muted: #64748B;
+--color-text-label: var(--color-text-primary);     /* now pure black */
++  --font-weight-label: var(--font-weight-bold); 
+    
+    /* UI */
+    --color-border: #CBD5E1;    /* light gray for borders in light mode */
+    --color-shadow: var(--color-shadow);
+    --color-quote-bg: rgba(14, 165, 233, 0.15);
+    
+    /* Buttons */
+    --color-btn-primary-bg: #0284C7;
+    --color-btn-primary-text: #FFFFFF;
+    --color-btn-primary-hover: #0369A1;
+}
+
+/* Dark Theme */
+.dark-theme {
+    /* Backgrounds */
+     --color-bg-primary:   #121212;  
+  --color-bg-secondary: #141414;
+  --color-bg-tertiary:  #1A1A1A;
+	
+    
+    /* Text */
+    --color-text-primary: #E0E0E0;
+    --color-text-secondary: #9CA3AF;
+    --color-text-accent: #693382;
+    --color-text-muted: #94A3B8;
+    +  --color-text-label: var(--color-text-primary);     /* stays white */
++  --font-weight-label: var(--font-weight-medium); 
+    /* UI */
+    --color-border: #333333;
+    --color-shadow: rgba(0, 0, 0, 0.5);
+    --color-quote-bg: rgba(56, 189, 248, 0.15);
+    
+    /* Buttons */
+    --color-btn-primary-bg: #0EA5E9;
+    --color-btn-primary-text: #000000;
+    --color-btn-primary-hover: #38BDF8;
+}
+
+.dark-theme .persona-card {
+    border: 1px solid var(--color-border);
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    font-family: var(--font-body);
+    font-size: var(--font-size-md);
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary);
+    transition: 
+        background-color var(--transition-normal), 
+        color var(--transition-normal);
+    overflow-x: hidden;
+}
+.dark-theme .constraints-table {
+    background: var(--color-bg-secondary);
+}
+
+.dark-theme .constraints-table tr {
+    /* override any inline row backgrounds */
+    background: var(--color-bg-secondary) !important;
+}
+
+.dark-theme .constraints-table th,
+.dark-theme .constraints-table td {
+    /* ensure all header & cell text is the same light color */
+    color: var(--color-text-primary);
+}
+/* Section heading */
+.tasks-heading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+}
+
+/* Each task block */
+.tasks-item {
+  margin-bottom: var(--space-xs);
+}
+
+/* Task title */
+.tasks-item__title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+/* Scenario / Task copy */
+.tasks-item__detail {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-xs);
+}
+
+/* Separator line */
+.tasks-separator {
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  margin: var(--space-sm) 0;
+}
+
+        /* ===== Header & Navigation ===== */
+        header {
+            width: 100%;
+            background-color: var(--color-bg-secondary);
+            padding: 1rem 2rem;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+.header-spacer {
+    height: 80px; /* Adjust to match your header height */
+}
+   
+.header-hidden {
+        transform: translateY(-100%);
+    }
+
+        .logo-placeholder {
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            margin-left: 1rem;
+ 
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background-color: currentColor;
+            transition: width var(--underline-speed) ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== Mobile Menu ===== */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--color-text-primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: var(--color-bg-secondary);
+            z-index: 999;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu a:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu a:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-menu a:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-menu a:nth-child(4) { transition-delay: 0.4s; }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+.hamburger:focus-visible {
+  outline: 2px solid var(--color-text-accent);
+  outline-offset: 2px;
+}
+        /* ===== Case Study Styles ===== */
+        .case-study-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+             font-size: var(--fs-h2);
+    font-weight: 700;
+    margin-bottom: .2rem;
+    color: var(--color-text-primary);
+    position: relative;
+    padding-bottom: 0.75rem;
+        }
+
+       
+
+        
+        }
+
+        /* Hero Images */
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Quote styles */
+        .quote {
+            font-style: italic;
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 3rem 0;
+            color: var(--color-text-primary);
+        }
+
+        .quote-attribution {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            margin: 2rem 0;
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: var(--color-bg-primary);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-text-primary);
+            transition: all 0.3s ease;
+	min-height: 2rem;
+width: 100%; /* Add if missing */
+  text-align: left; /* Add if missing */
+  background: inherit;
+        }
+
+        .accordion-header:hover {
+            background: var(--color-bg-tertiary);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: var(--color-bg-secondary)
+        }
+
+        .accordion-content-inner {
+            padding: 1.5rem;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+.accordion-header:focus-visible {
+  outline: 2px solid var(--color-text-accent);
+  outline-offset: 2px;
+}
+        .accordion-active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .case-study-container {
+                padding: 1rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .hero-image {
+                height: 250px;
+            }
+
+            .quote {
+                font-size: 1.25rem;
+            }
+ .insight-cards {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .insight-card {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+        }
+/* Global styles */
+.case-study-section {
+  margin: 4rem auto;      /* 4rem vertical gutter, auto left/right */
+  width: 100%;
+  max-width: 1900px;
+  padding: 0 15px;        /* 15px horizontal gutter on both sides */
+}
+
+.flow-container-wrapper {
+  width: 100%;
+  padding: 0;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+}
+
+.section-description {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 700px;
+  margin-bottom: 3rem;
+}
+
+.flow-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 30px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1906px;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
+}
+
+.flow-step {
+  flex: 0 0 200px;
+  width: 200px;
+  max-width: 200px;
+  text-align: center;
+}
+button, 
+.nav-links a, 
+.accordion-header, 
+[class*="btn"], 
+.insight-card, 
+.mobile-menu a {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-sm);
+}
+.nav-links a,
+.mobile-menu a {
+  margin-bottom: var(--space-xs);
+  display: inline-block; /* Ensures the height is applied */
+}
+
+@media (max-width: 1200px) and (min-width: 768px) {
+  .insight-cards {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  .insight-card {
+    width: 100%;
+    min-height: 18rem;
+  }
+}
+@media (max-width: 1600px) {
+  .flow-container {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .flow-container {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .flow-container {
+    padding: 2rem 15px;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .flow-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1.5rem 15px;
+  }
+  
+  .flow-step {
+    flex: 0 0 30%;
+    width: 30%;
+    max-width: 200px;
+    margin-bottom: 2rem;
+  }
+  
+  .screen-placeholder {
+    width: 100%;
+    max-width: 200px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .flow-container {
+    padding: 1.5rem 15px;
+    gap: 2rem;
+
+  }
+  
+  .flow-step {
+    flex: 0 0 45%;
+    width: 45%;
+    max-width: 200px;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .flow-container {
+    padding: 1rem 15px;
+  }
+  
+  .flow-step {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 2.5rem;
+  }
+  
+  .screen-placeholder {
+    width: 200px;
+    height: 400px;
+  }
+}
+/* Task item spacing */
+.task-item {
+  /* give each task some breathing room */
+  margin:0;    /* 1rem top & bottom */
+  padding: 0;   /* optional: little vertical padding */
+}
+
+/* Horizontal divider between tasks */
+hr.task-separator {
+  border: none;                                 /* drop default border */
+  height: 1px;                                  /* make it a thin line */
+  background-color: var(--color-border);        /* use your theme’s border color */
+  margin:  0;                    /* 1rem above & below */
+}
+
+
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: left;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+.constraints-table {
+    border-collapse: separate;
+    border-spacing: 0 1rem;       /* vertical gap between “cards” */
+    margin: 1rem 0;
+}
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  .constraints-table tr {
+  display: block;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-primary);
+
+}
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border: none;
+    display: block;
+    padding: 1rem 0.5rem;         /* keep your existing padding */
+    line-height: 1.4 
+
+  }
+  
+  table td::before {
+    content: attr(data-label);
+  display: block;       /* Changed from float */
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5em; /* Added spacing */
+  font-size: 0.75em;
+  color: #666;
+  letter-spacing: 0.5px;
+  width: 100%;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+table tr {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* general styling */
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+  /* Container for screenshots */
+  .screenshots-container {
+    display: flex;
+    flex-wrap: wrap;                       /* allows wrapping on small screens */
+    gap: var(--screenshot-gap, var(--space-lg));      /* space between items */
+    margin: 0 var(--screenshot-margin, var(--space-md)); /* horizontal margins */
+margin-left: calc(var(--screenshot-margin, var(--space-md)) - 25px);
+  }
+
+  /* Wrapper for each screenshot */
+  .screenshot-wrapper {
+    flex: 1;                               /* evenly distribute space */
+    min-width: 300px;                      /* prevents items from getting too small */
+  }
+
+  /* The placeholder “image” */
+  .screenshot-placeholder {
+    width: 100%;
+    height: 480px;
+    background: var(--color-border);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+	
+  }
+
+.insight-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .insight-card {
+    position: relative;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: var(--space-lg);
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+	height: 16.5rem;
+	width: 20rem; 
+border: 1px solid var(--color-border);
+  }
+
+  .insight-card .ribbon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--color-text-accent);
+    color: var(--color-bg-secondary);
+    padding: var(--space-xs) var(--space-md);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    border-bottom-right-radius: var(--radius-sm);
+  }
+
+  .insight-card h3 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+    margin: var(--space-md) 0 var(--space-sm);
+  }
+
+  .insight-card .label {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: var(--space-xs) 0;
+  }
+
+  .insight-card p {
+    margin: 0 0 var(--space-xs);
+    line-height: 1.5;
+  }
+/* 1) Make the wrapper center its one child (.summary-grid) */
+.project-header {
+  display: flex;
+  justify-content: center;
+  /* flex-wrap if you need it: */
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);  /* match your previous spacing */
+margin-left: -20px;
+}
+
+/* 2) Ensure the grid itself stays responsive & centered */
+.summary-grid {
+  width: 100%;
+  max-width: 1200px;                      /* or your chosen max */
+  margin: 0 auto;                         /* centers within flex item, fallback */
+  display: grid;
+  grid-template-columns: repeat(4, minmax(250px, 1fr));
+  column-gap: 4rem;                       /* wide enough so your text is two lines */
+  row-gap: var(--space-sm);
+}
+.screen-container {
+  aspect-ratio: 1/2; /* Phone-like ratio */
+  background: var(--color-border);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  max-width: 100%;
+}
+/* Tablet: 2 cols */
+@media (max-width: 1200px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-md);
+  }
+}
+
+/* Mobile: 1 col */
+@media (max-width: 480px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+    column-gap: var(--space-sm);
+  }
+}
+.hero-image {
+  height: auto;            /* replace your fixed 400px/250px */
+  aspect-ratio: 16/9;
+}
+.concept-section {
+  padding: 2rem 1rem;
+
+}
+.concept-heading {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-primary);
+text-align: center;
+}
+
+
+
+/* Individual card flex layout */
+.concept-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+height: 100%; /* Fill the grid cell */
+}
+.concept-card .screen-container {
+  /* Prevent shrinking and fix width */
+  flex: 0 0 240px;
+  width: 240px;
+  max-width: 100%;   /* remain responsive on small viewports */
+  aspect-ratio: 1/2;
+}
+/* Swap order on the "before" card */
+.before-card {
+  flex-direction: row-reverse;
+}
+
+/* Mockup styling (fixed 240×480 to match your screens) */
+.mockup-frame {
+  flex-shrink: 0;
+ max-width: 100%; /* New - ensures it never overflows */
+  aspect-ratio: 1/2; /* New - replaces fixed height */
+  background: var(--color-border);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.concept-card .card-text {
+  flex: 2;
+  min-width: 350px;
+}
+.screen-placeholder {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Text block with padding */
+.card-text {
+  flex: 1;
+  padding: var(--space-xs);
+min-width: 300px;
+}
+
+/* Title styling */
+.analysis-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-primary);
+}
+
+/* List with breathing room */
+.analysis-list {
+  list-style-position: outside;
+  padding-left: var(--space-md);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+  max-width: 1200px;
+  margin: 0 auto;
+grid-auto-rows: 1fr;
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+  .concept-card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .analysis-list {
+    margin: 1rem 0 0;
+    padding-left: 1rem;
+    max-width: 360px;
+  }
+}
+/* tablet breakpoint: force 2 columns */
+@media (max-width: 1024px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    column-gap: var(--space-md) !important;
+  }
+}
+@media (max-width: 1100px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+.timeline-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+.timeline-link:hover,
+.timeline-link:focus {
+  background: #693382;
+  color: var(--color-bg-primary);
+  outline: none;
+}
+.meta-row .metadata-label {
+ /* Jakarta labels, dynamic dark/light color */
++  font-family: var(--font-heading);
++  color: var(--color-text-primary);
++  font-size: var(--font-size-md);
++  font-weight: var(--font-weight-bold);
+}
+.wider-image {
+  width: 60vw;
+  max-width: 1400px;
+  height: auto;
+  display: block;
+  margin: 2rem calc(-50vw + 50%);
+  margin: 2rem auto !important;
+  border-radius: 8px;
+  box-sizing: content-box;
+}
+  @media (max-width: 768px) {
+    /* Tablet adjustments */
+    .flow-2-container img {
+      width: 90vw !important;
+      padding: 0 15px;
+    }
+.persona-card > div[style*="grid-template-columns: auto 1fr"] {
+    display: block !important; /* Remove grid */
+    padding: 1.5rem;
+  }
+
+  /* Avatar container */
+  .persona-card > div[style*="grid-template-columns: auto 1fr"] > div:first-child {
+    margin: 0 auto 1rem; /* Center avatar */
+  }
+
+  /* Text container */
+  .persona-card > div[style*="grid-template-columns: auto 1fr"] > div:last-child {
+    text-align: center;
+    width: 100%;
+  }
+  }
+  
+  @media (max-width: 480px) {
+    /* Mobile adjustments */
+    .flow-2-container img {
+      width: 85vw !important;
+      padding: 0 20px;
+    }
+  }
+/* CORE STYLES */
+.flow-diagram {
+  display: flex;
+  gap: 2rem;
+  justify-content: center !important;
+  align-items: flex-start;
+  overflow: visible;
+}
+.flow-step {
+  flex: 0 0 auto; /* Reset flex basis */
+  width: min(200px, 20vw); /* Width constraints */
+  min-width: 180px; /* Absolute minimum */
+}
+.flow-step img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.flow-step figcaption {
+  text-align: center;
+  max-width: 280px; /* Optimal line length */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* hide bullets by default */
+.flow-bullets {
+  display: none;
+  text-align: center; /* ← Changed */
+  padding-left: 0; /* ← Changed */
+  list-style-position: inside; /* ← Changed */
+  margin: 0 auto; /* ← New */
+  max-width: 600px; /* ← New */
+  font-size: 1rem;
+  line-height: 1.5;
+
+}
+.flow-bullets li {
+  text-align: left;
+  display: block;
+  margin-left: -1.2em;
+  margin-bottom: 0.5rem;
+}
+/* TABLET AND BELOW: show bullets only */
+@media (max-width: 1564px) {
+  .flow-diagram {
+    display: none;
+  }
+  .flow-bullets {
+    display: block;
+  }
+}
+.flow-diagram {
+  /* override the old spacing */
+  gap: clamp(2rem, 4vw, 4rem) !important; /* Fluid spacing */
+  padding: 0 1.5rem; /* Side padding */
+justify-content: center !important; /* ← Add this line */
+}
+.screen-flow { /* Target the <section> holding the diagram */
+    margin: 0 -1.5rem; /* Pull content to edges */
+}
+.constraints-table {
+  margin: 2rem 0; /* Match your desired spacing */
+
+border-radius: var(--radius-md);
+}
+
+
+
+.constraints-table th:first-child {
+    border-top-left-radius: var(--radius-md);
+}
+.constraints-table th:last-child {
+    border-top-right-radius: var(--radius-md); /* Add this line */
+    border-right: none;
+}
+@media (min-width: 601px) {
+  .constraints-table {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border-collapse: separate; 
+    border-spacing: 0;
+    border: 1px solid var(--color-border); /* Add outer border */
+  }
+ .constraints-table thead th {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+  /* Restore inner borders */
+  .constraints-table th,
+  .constraints-table td {
+    border-bottom: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+  }
+
+  /* Remove right border from last cell in each row */
+  .constraints-table tr td:last-child,
+  .constraints-table tr th:last-child {
+    border-right: 0;
+  }
+
+  /* Remove bottom border from last row */
+  .constraints-table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  /* Rounded corners */
+  .constraints-table th:first-child {
+    border-top-left-radius: 0.75rem;
+  }
+  .constraints-table th:last-child {
+    border-top-right-radius: 0.75rem;
+  }
+  .constraints-table tr:last-child td:first-child {
+    border-bottom-left-radius: 0.75rem;
+  }
+  .constraints-table tr:last-child td:last-child {
+    border-bottom-right-radius: 0.75rem;
+  }
+}
+@media (max-width: 767px) {
+  div[style*="height: 480px"] {
+    max-width: 90% !important;
+    margin-right: .05rem  !important;
+  }
+}
+.persona-bulletpoints li {
+    color: var(--color-text-secondary);
+}
+.resp-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .resp-compare {
+    grid-template-columns: 1fr;
+  }
+}
+/* --- Styles for the New Layout --- */
+
+.concept-section {
+  padding: 2rem 1rem;
+  margin: 3rem 0; /* Added margin for separation */
+}
+
+.concept-heading {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.layout-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile: Single column */
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center; /* Center items vertically on mobile */
+}
+
+.image-group {
+  display: flex; /* Use flex to put images side-by-side on mobile too */
+  flex-wrap: wrap; /* Allow wrapping if needed */
+  justify-content: center; /* Center images */
+  gap: 1rem; /* Space between images */
+  grid-row: 1; /* Images appear first on mobile */
+}
+
+.screen-container {
+  width: 150px; /* Adjust width as needed */
+  max-width: 45%; /* Limit width on smaller screens */
+  aspect-ratio: 1/2;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border); /* Optional border */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.text-group {
+  display: grid;
+  gap: 1.5rem; /* Space between the two text items */
+  grid-row: 2; /* Text appears second on mobile */
+}
+
+.text-item {
+ /* Add padding/border if desired */
+ padding: 1rem;
+ background-color: var(--color-bg-secondary); /* Optional background */
+ border-radius: var(--radius-md); /* Optional corners */
+ border: 1px solid var(--color-border); /* Optional border */
+}
+
+.text-item h4 { /* Style for the optional Before/After titles */
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--font-size-md);
+    margin-bottom: 0.5rem;
+    color: var(--color-text-primary);
+    text-align: center; /* Center titles on mobile */
+}
+
+.analysis-list {
+  list-style-position: outside;
+  padding-left: 1.5rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0; /* Remove default margins */
+  text-align: left; /* Keep text left-aligned */
+}
+
+
+/* --- Desktop Styles --- */
+@media (min-width: 900px) {
+  .layout-container {
+    grid-template-columns: 1fr 1fr; /* Desktop: Two equal columns */
+    gap: 2.5rem; /* Adjust gap for desktop */
+    align-items: start; /* Align groups to the top */
+  }
+
+  .text-group {
+    grid-column: 1; /* Text group in the first column */
+    grid-row: 1;    /* Ensure it's in the first row */
+  }
+
+   .text-item h4 {
+        text-align: left; /* Align titles left on desktop */
+   }
+
+   .image-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-md);
+    justify-items: center;
+  }
+
+  .screen-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* Optional: Larger Desktop Styles */
+
+@media (max-width: 768px) {
+  /* Reduce vertical margins around the heading */
+  h3[style*="margin-top: 40px"] {
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Adjust paragraph spacing */
+  p[style*="margin-bottom: 2rem"] {
+    margin-bottom: 1rem !important;
+  }
+
+  /* Make image container more compact */
+  a[aria-label="First Designs for Usability Testing"] {
+    height: 400px !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Optional: Reduce font size for better proportion */
+  h3[style*="font-size: 1.25rem"] {
+    font-size: 1.1rem !important;
+  }
+  @media (min-width: 1024px) {
+    .image-group img {
+      max-width: 400px; /* Smaller size on desktop */
+    }
+  }
+  .summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+  /* Even smaller for very large screens */
+  @media (min-width: 1440px) {
+    .image-group img {
+      max-width: 350px;
+    }
+  }
+
+/* Force .text-item h4 to use secondary text color */
+.text-item h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--font-size-md);
+  margin-bottom: var(--space-xs);
+  text-align: center;
+  color: var(--color-text-primary) !important;
+}
+@media (max-width: 768px) {
+  #theme-toggle-btn {
+    position: fixed;
+    right: 80px; /* Adjust this value to control how close to hamburger */
+    top: 12px; /* Align with top of header */
+  }
+}
+.project-header {
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  margin-bottom: var(--space-lg);
+}
+<div style="grid-column: 1 / -1; padding: 0; position: relative;">
+  <hr style="margin: 0.5rem auto; border: 0; border-top: .5px solid var(--color-border); display: block; width: 95%; max-width: 1100px;">
+</div>
+
+</style>
+</head>
+<body>
+    <header>
+    <div class="logo-placeholder" style="margin-left: 20px;">UX PORTFOLIO</div>
+    <div style="display: flex; align-items: center;">
+        <button id="theme-toggle-btn" aria-label="Toggle theme" style="background: transparent; border: none; margin-right: 5px; transform: translateY(-6px); padding: 20px; font-size: 1.2rem; cursor: pointer;">🌙</button>
+
+        <nav class="nav-links">
+	<a href="index.html#work">Home</a>
+            <a href="index.html#work">Work</a>
+            <a href="index.html#resume">Resume</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-controls="mobile-menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+<a href="index.html#work" role="menuitem" tabindex="-1">Home</a>
+<a href="index.html#work" role="menuitem" tabindex="-1">Work</a>
+<a href="index.html#work" role="menuitem" tabindex="-1">Resume</a>
+<a href="index.html#work" role="menuitem" tabindex="-1">About</a>
+<a href="index.html#work" role="menuitem" tabindex="-1">Contact</a>
+    </div>
+
+    <!-- Project Introduction Section -->
+    <section class="case-study-container" style="margin-top: 2rem;">
+        <!-- Top Hero Image -->
+        <!-- Project Introduction Section -->
+<section class="case-study-container" style="margin-top: rem;">
+  <img src="https://i.ibb.co/zhC53xms/ACC-Students-scr-6-1000x640.jpg" 
+     alt="ACC Course Evaluation Guide Hero Image" 
+     class="hero-image"
+     style="display: block; 
+            margin-left: auto; 
+            margin-right: auto; 
+            margin-bottom: 2rem;
+            width: 100%; 
+            max-width: 2400px;
+            height: auto; 
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow */
+            object-fit: cover; /* Ensures the image covers the area nicely */
+            transition: transform 0.3s ease; /* Optional: for hover effects */
+            ">
+
+<div class="project-header">
+  <!-- 4×2 summary grid -->
+  <div class="summary-grid">
+    <!-- Row 1 -->
+    <div class="summary-item">
+      <h3>Client</h3>
+      <p>
+        Austin Community College's <br>
+        Teaching, Learning and Excellence Division
+      </p>
+    </div>
+    <div class="summary-item">
+      <h3>Challenge</h3>
+      <p>
+        Post-COVID course evaluation completion rate
+        dropped from 94% to 34%
+      </p>
+    </div>
+    <div class="summary-item">
+      <h3>Solution</h3>
+      <p>
+        Google calendar integration<br>Student testimonials<br>Mobile-first design
+      </p>
+    </div>
+    <div class="summary-item">
+      <h3>Impact</h3>
+      <p>Reduced task time by 22%<br>Reduced errors by 15%<br>Reduced clicks by 29%</p>
+    </div>
+    <div style="grid-column: 1 / -1; padding: 0; position: relative;">
+      <hr style="margin: 0.5rem auto; border: 0; border-top: .5px solid var(--color-border); display: block; width: 95%; max-width: 1100px;">
+    </div>
+    <!-- Row 2 -->
+    <div class="summary-item">
+      <h3>Team</h3>
+      <p>3 Designers</p>
+    </div>
+    <div class="summary-item">
+      <h3>My Roles</h3>
+      <p>Lead UX Design / Strategy</p>
+    </div>
+    <div class="summary-item">
+      <h3>Timeline</h3>
+      <p>Jan – Apr 2022</p>
+    </div>
+    <div class="summary-item">
+      <h3>Tools</h3>
+      <p>Figma, Miro, Google Suite</p>
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+
+<a
+    href="https://i.ibb.co/WNTcxxZ6/Group-3160.png"
+  role="img"
+  target="_blank"
+  aria-label="Final Screens"
+  style="
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    position: relative;
+    border-radius: 0.5rem;
+    margin: 0 auto;
+    cursor: pointer;
+    background-image: url('https://i.ibb.co/WNTcxxZ6/Group-3160.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    aspect-ratio: 11/9;
+  "
+></a>
+
+        <!-- Framing the Project Section -->
+        <div class="case-study-section">
+	
+            <h1 class="section-title"
+    style="font-size: var(--fs-h1);margin-left: -.5rem; margin-bottom: clamp(-1.5rem, -4vw, -0.75rem);font-weight: 700;">
+  PROBLEM SPACE
+</h1>
+            
+            <p style="font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary);margin-left: -8px; margin-bottom: 1rem;">When ACC shifted from in-class paper evaluations to digital-only formats in 2020 due to COVID-19, participation plummeted from 94% to 34%, despite 80% of participants rating the experience positively—suggesting barriers weren't about quality but engagement. Our team partnered with the Teaching, Learning, and Excellence Division to investigate these deeper participation barriers, aiming to increase completion rates to 49% within one semester by developing a comprehensive plan that would address the disconnect between student satisfaction and participation rates.</p>
+<p style="font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 1rem;">
+ 
+ </p>
+<a href="#" 
+   class="timeline-link" 
+   style="margin-left: -8px; display: inline-block; text-align: left;">
+  View Project Timeline & Brief →
+</a>
+        
+
+
+        <!-- Empathy through Research Section -->
+        <div class="case-study-section">
+	
+            
+            <h1 class="section-title"
+    style="font-size: var(--fs-h1); margin-bottom: clamp(-1rem, -3vw, -0.5rem);font-weight: 700;margin-left: -26px;">
+  RESEARCH
+</h1>     
+            <p style="font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 1rem;margin-left: -24px;">
+                To pinpoint why participation plunged from 94% to 34%, I led a mixed-methods study combining competitive analysis of three peer platforms, surveys of 10 students, and in-depth interviews with 7 participants.
+            </p>
+
+<h3 style="font-size: 1.25rem; font-weight: 600;margin-left: -24px; margin-bottom: .25rem; color: var(--color-text-primary);">Early Findings</h3>
+      <ul style="
+    padding-left: 1.2rem;
+    margin-left: -24px;    /* ← added */
+margin-bottom: .5rem; 
+    color: var(--color-text-secondary);
+    line-height: 1.7;">
+<li>Surveys showed 80% prefer mobile access and 70% simply forget to complete evaluations</li>
+<li>Our competitive review confirmed clear access instructions but revealed a lack of engagement hooks</li>
+<li>Interviews then surfaced motivational and clarity gaps—students wanted to know “how it helps” and needed timely reminders to follow through.</li>
+      </ul>
+
+
+
+
+
+ <!-- Key User Interview Quotes -->
+<div style="margin-left: -24px;">
+  <h4 style="font-size: 1rem; font-weight: 600; margin: 2rem 0 1rem; margin-bottom: .75rem; margin-left: 0px; color: var(--color-text-primary);">Key User Interview Quotes</h4>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: -2.25rem;">
+    <div style="background: var(--color-bg-tertiary); padding: 1.5rem; border-radius: 0.5rem;">
+      <p style="font-style: italic; margin-bottom: 0.5rem; color: var(--color-text-secondary); line-height: 1.6;">"I guess if I knew directly how it helps, in what way it's helped. Like if I know us doing it, how is it going to impact us?"</p>
+      <p style="font-weight: 600; color: var(--color-text-primary); font-size: 0.9rem;">- Participant 2</p>
+    </div>
+    
+    <div style="background: var(--color-bg-tertiary); padding: 1.5rem; border-radius: 0.5rem; margin-right: -1rem;">
+      <p style="font-style: italic; margin-bottom: 0.5rem; color: var(--color-text-secondary); line-height: 1.6;">"I have to kind of take initiative to put on my calendar, or I have to do it as soon as the notification comes through otherwise, I'm going to mean to do it and then forget to do it."</p>
+      <p style="font-weight: 600; color: var(--color-text-primary); font-size: 0.9rem;">-Participant 1</p>
+    </div>
+  </div>
+</div>
+</div>
+
+ 
+
+
+<!-- Accordion for Setup Details -->
+<div class="accordion" style="max-width: 1125px;margin-top: 1.25rem; margin-left: -8px; margin-right: 0px;">
+  <div class="accordion-header" 
+     tabindex="0"
+     role="button"
+     aria-expanded="false"
+     aria-controls="research-methods-content">
+  <span>Click To View The Full Research Methodology Details (methods, participants, questions & constraints)</span>
+  <span class="accordion-icon">▼</span>
+</div>
+                <div class="accordion-content" id="research-methods-content">
+                    <div class="accordion-content-inner">
+                        
+
+<div style="margin-bottom: 1.5rem;">
+  <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: -.5rem; color: var(--color-text-primary);">Overivew</h3>
+  <ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Mixed-methods approach:</strong> Balanced depth with project constraints
+    </li>
+<li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+<span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Screener criteria:</strong> Must have been enrolled for at least one full semester
+    </li>
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Sample size:</strong> 10 surveys, 7 interviews
+    </li>
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Timeline:</strong> Four-month project duration
+    </li>
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Validation:</strong> Triangulated data across methods with 95% confidence level
+    </li>
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Verification:</strong> Conducted stakeholder sessions with Teaching & Learning Excellence Division
+    </li>
+  </ul>
+</div>
+
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">User Interviews</h3>
+<ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Format:</strong> Remote, one-on-one, 30-minute sessions
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Participants:</strong> 7 students across diverse programs, ages (18-53), and course formats
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Environment:</strong> Comfortable, low-pressure setting for candid responses
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Focus:</strong> Pain points, motivations, and suggestions for improvement
+  </li>
+</ul>
+
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">Surveys</h3>
+<ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Format:</strong> In-person surveys at ACC Highland Campus
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Participants:</strong> 10 students with diverse backgrounds
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Benefits:</strong> Maximized accessibility and convenience
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Topics:</strong> Participation frequency, time investment, and perceived value
+  </li>
+</ul>
+
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">Main Research Questions</h3>
+<ol style="list-style: decimal; padding-left: 1.5rem; color: var(--color-text-secondary);">
+  <li style="margin-bottom: 0.5rem; line-height: 1.6;">
+    What are the biggest barriers preventing students from participating in course evaluations?
+  </li>
+  <li style="margin-bottom: 0.5rem; line-height: 1.6;">
+    How do students prefer to receive and manage academic communications and reminders, particularly regarding tasks like course evaluations?
+  </li>
+  <li style="margin-bottom: 0.5rem; line-height: 1.6;">
+    What are students' motivations (or lack thereof) for providing feedback on their courses and instructors?
+  </li>
+  <li style="margin-bottom: 0.5rem; line-height: 1.6;">
+    What are students' perceptions of the impact and value of their course evaluation feedback?
+  </li>
+</ol>
+                            </li>
+                        </ul>
+                    
+
+<div style="
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;                   /* space between text & image */
+  align-items: center;   /* ← change this */
+justify-content: center;         /* top-align them */
+">
+  <!-- Text column -->
+  <div style="flex: 1 1 300px; min-width: 300px;">
+    <h3 style="font-size:1.1rem; font-weight:600; margin:1.5rem 0 0.5rem; color:var(--color-text-primary);">
+      Competitive Analysis
+    </h3>
+    <p style="color:var(--color-text-secondary); line-height:1.6; margin-bottom:1rem;">
+      Here's what stood out when we evaluated three Texas-based community college course evaluation pages:
+    </p>
+
+
+    <ul style="list-style:none; padding-left:0; color:var(--color-text-secondary);">
+      <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    Lone Star College
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    Houston Community College
+  </li>
+<li style="position: relative; padding-left: 1.5rem; margin-bottom: 1rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    San Jacinto College 
+  </li>
+</ul>
+    </ul>
+
+
+    <h4 style="font-size:1rem; font-weight:500; margin:0.5rem 0 0.25rem; color:var(--color-text-primary);">
+      What They Do Well
+    </h4>
+    <ul style="list-style:none; padding-left:0; color:var(--color-text-secondary);">
+        <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Login & timing instructions are included:</strong> Students are told when evaluations open and how to access them.
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Basic clarity of purpose:</strong> Each page clearly explains what course evaluations are and why they exist.
+  </li>
+    </ul>
+    <h4 style="font-size:1rem; font-weight:500; margin:1rem 0 0.25rem; color:var(--color-text-primary);">
+      What They're Missing
+    </h4>
+    <ul style="list-style:none; padding-left:0; color:var(--color-text-secondary);">
+      <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Lack of compelling motivation:</strong> None of the pages directly show students how their feedback has made a real difference.
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Design feels utility-based, not user-centered:</strong> Most interfaces appear built for compliance, not conversion or engagement.
+  </li>
+</ul>
+    </ul>
+  </div>
+
+  <!-- Image column -->
+  <figure style="flex: 1 1 300px; min-width: 300px; margin: 0;">
+    <a href="https://i.ibb.co/bq5yhMG/Group-3395.png" target="_blank" rel="noopener">
+      <img
+        src="https://i.ibb.co/bq5yhMG/Group-3395.png"
+        alt="Combined competitor screenshot"
+        style="width:100%; height:auto; display:block; border-radius:0.5rem;"
+      >
+    </a>
+  </figure>
+</div>
+
+
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">Additional Survey Findings</h3>
+<ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>80%</strong> prefer completing evaluations on mobile devices, reinforcing the need for a mobile-first approach.
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>70%</strong> of students simply forget to fill out evaluations, indicating an opportunity for better reminders.
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>60%</strong> of students are motivated by bonus points added to their lowest grade.
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Qualitative answers showed us that</strong> students described evaluations as <strong>"too long"</strong> with <strong>"too many questions"</strong> that <strong>"repeat too much"</strong>
+  </li>
+</ul>
+
+
+<section id="research-constraints" class="case-study-section">
+
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: -1rem; margin-left: -1rem; margin-top: 1.5rem; color: var(--color-text-primary);">Research Constraints</h3>
+  <table class="constraints-table" style="margin-left: -16px;">
+    <thead>
+      <tr>
+        <th>Constraint</th>
+        <th>Impact</th>
+        <th>Adaptation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Constraint">No baseline analytics provided</td>
+        <td data-label="Impact">Couldn’t quantify page visits or drop-off rates</td>
+        <td data-label="Adaptation">Relied on interviews &amp; surveys; </td>
+      </tr>
+      <tr>
+        <td data-label="Constraint">Screener criteria</td>
+        <td data-label="Impact">Excluded students with under one semester’s experience—new-student pain points may differ</td>
+        <td data-label="Adaptation">Planned follow-up sessions post launch with first-semester students to validate and broaden findings</td>
+      </tr>
+      <tr>
+        <td data-label="Constraint">Limited sample size &amp; diversity</td>
+        <td data-label="Impact">Insights from 10 surveys and 7 interviews may not generalize across all student segments</td>
+        <td data-label="Adaptation">Applied purposive screening for key segments; laid groundwork for a larger post-launch survey</td>
+      </tr>
+      <tr>
+        <td data-label="Constraint">Project timeline</td>
+        <td data-label="Impact">Four-month scope restricted number of sessions and prototype iterations</td>
+        <td data-label="Adaptation">Prioritized core research questions; used lean artifacts to maximize insights</td>
+      </tr>
+<tr>
+  <td data-label="Constraint">No instructor &amp; staff interviews</td>
+  <td data-label="Impact">Lacked understanding of how and when instructors would promote the guide</td>
+  <td data-label="Adaptation">Plan post-launch stakeholder interviews to optimize sharing workflows</td>
+</tr>
+<tr>
+  <td data-label="Constraint">No email-engagement metrics</td>
+  <td data-label="Impact">Couldn’t gauge open- or click-through rates on reminder messages</td>
+  <td data-label="Adaptation">Requested mailing-list analytics for post-launch performance tuning</td>
+</tr>
+    </tbody>
+  </table>
+</section>
+
+
+
+                </div>
+            </div>
+        </div>
+
+</div>
+        <div class="case-study-section">
+            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: .25rem; color: var(--color-text-primary);margin-left: -8px;">User Personas</h3>
+            
+            <p style="font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: .25rem;margin-right: 15px;margin-left: -8px;">
+                Based on our mixed-methods research findings I developed three strategic user personas
+            </p>
+<div class="persona-bulletpoints" style="margin-left: -6px;margin-bottom: 12px;">
+      <li><strong>Bryan</strong> who represents students who require peer and instructor insights to understand feedback's purpose.</li>
+      <li><strong>Michele</strong> who represents students who need better ways to remind themselves about the course evaluations.</li>
+      <li><strong>Taylor</strong> who represents students to need great user experience specfically on mobile view ports.</li>
+ 
+           </div>
+
+
+            <!-- Persona Card -->
+            <div class="persona-card" style="background: var(--color-bg-secondary); border-radius: 0.5rem; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-left: -8px;">
+
+                <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; background: var(--color-bg-tertiary); padding: 2rem; align-items: center;">
+                    <div style="
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;            /* keeps it from shrinking if you’re using flexbox */
+">
+  <img
+    src="https://i.ibb.co/mC1xxNdm/Mask-group-2.png"
+    alt="Bryan avatar"
+    style="
+      width: 100%;
+      height: 100%;
+      object-fit: cover;      /* fills the circle without distorting */
+      display: block;         /* removes inline‐img whitespace */
+    "
+  >
+</div>
+                    <div>
+                        <h3 style="font-size: 1.5rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.5rem;">Bryan</h3>
+                        <p style="color: var(--color-text-secondary); font-style: italic; line-height: 1.5;">"I'm always too busy with assignments and work to fill out long evaluation forms."</p>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Biography</h4>
+                        <p style="color: var(--color-text-secondary); line-height: 1.6;">Bryan is a 22-year-old student balancing a part-time job with a full course load. He values efficiency and quick processes.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Goals</h4>
+                        <ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Complete evaluations quickly
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Provide meaningful feedback without too much effort
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                See that his feedback makes a difference
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Frustrations</h4>
+                        <ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Too many evaluation forms to fill out
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Unclear questions that take time to understand
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                No evidence that his feedback is considered
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+<div class="accordion" style="max-width: 1125px;margin-top: 2rem; margin-left: -8px; margin-right: 0px;">
+  <div class="accordion-header" 
+     tabindex="0"
+     role="button"
+     aria-expanded="false"
+     aria-controls="research-methods-content">
+  <span>Click To View The Additional Personas & User Journey Map</span>
+  <span class="accordion-icon">▼</span>
+</div>
+        
+                <div class="accordion-content" id="research-methods-content">
+                    <div class="accordion-content-inner">
+                        
+
+
+<div class="persona-card" style="background: var(--color-bg-secondary); border-radius: 0.5rem; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px;margin-left: 0px;">
+
+                <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; background: var(--color-bg-tertiary); padding: 2rem; align-items: center;">
+                    <div style="
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;            /* keeps it from shrinking if you’re using flexbox */
+">
+  <img
+    src="https://i.ibb.co/k6J9Jvw8/Mask-group-1.png"
+    alt="Michelle avatar"
+    style="
+      width: 100%;
+      height: 100%;
+      object-fit: cover;      /* fills the circle without distorting */
+      display: block;         /* removes inline‐img whitespace */
+    "
+  >
+</div>
+                    <div>
+                        <h3 style="font-size: 1.5rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.5rem;">Michelle</h3>
+                        <p style="color: var(--color-text-secondary); font-style: italic; line-height: 1.5;">"Everything I do goes into my calendar, its runs my entire life."</p>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Biography</h4>
+                        <p style="color: var(--color-text-secondary); line-height: 1.6;">Michelle is a 24-year-old student. She's a double major who is very busy with all her classes, family life social obliations. She values being able to put important dates on her calendar.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Goals</h4>
+                        <ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Possessing a clear plan & structure for tasks
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Desires  to give back to ACC and help those coming after her
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                View time as her most valuable resource
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Frustrations</h4>
+                        <ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Occasionally forgets to add things to their calendar or to do list
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Has  tendency to multi-task leading to task triage
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                At times needs extra input to understand how long a task will take
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+<div class="persona-card" style="background: var(--color-bg-secondary); border-radius: 0.5rem; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-left: 0px;">
+
+                <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; background: var(--color-bg-tertiary); padding: 2rem; align-items: center;">
+                    <div style="
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;            /* keeps it from shrinking if you’re using flexbox */
+">
+  <img
+    src="https://i.ibb.co/gM3w1cyz/Mask-group.png"
+    alt="Taylor avatar"
+    style="
+      width: 100%;
+      height: 100%;
+      object-fit: cover;      /* fills the circle without distorting */
+      display: block;         /* removes inline‐img whitespace */
+    "
+  >
+</div>
+                    <div>
+                        <h3 style="font-size: 1.5rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.5rem;">Taylor</h3>
+                        <p style="color: var(--color-text-secondary); font-style: italic; line-height: 1.5;">"If I can’t do it on my phone then it probably takes too long."</p>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Biography</h4>
+                        <p style="color: var(--color-text-secondary); line-height: 1.6;">Taylor is a 21-year-old first generation student who spends most of their time on the go and values mobile first interactions.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Goals</h4>
+                        <ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                The experiences needs to have a little friction as possible
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                To be aware of the latest events within their community
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Representation is a paramount concern
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 style="font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; color: var(--color-text-secondary); font-weight: 600;">Frustrations</h4>
+                        <ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                May miss due to a constant on the go schedule
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                               Impatient with task and likes to move quickly
+                            </li>
+                            <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                                <span style="position: absolute; left: 0; color: var(--color-text-muted);">•</span>
+                                Critical of experiences & expects them to be well crafted 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+<h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: .25rem;margin-top: 40px; margin-left: 4px; color: var(--color-text-primary);">User Journey</h3>
+    <p style="color: var(--color-text-secondary); line-height: 1.6; margin-bottom: .75rem;margin-left: 4px;">
+      Right after defining our personas, we mapped the student’s end-to-end experience—from the moment they learn an evaluation is due (via professor announcement or email) through selecting an access method (Blackboard vs. email link) to finally completing the form.
+    </p>
+  
+<a
+  href="https://i.ibb.co/350TkT6y/Group-3396.png"
+  role="img"
+  aria-label="User Journey Map."
+  style="
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: 600px;
+    background-image: url('https://i.ibb.co/350TkT6y/Group-3396.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0.5rem;
+    margin: 0 auto;
+    cursor: pointer;
+  "
+></a>
+    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.5; margin-top: 1rem; text-align: center;">
+      User Journey Map
+    </p>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+  </div> <!-- Close accordion-content-inner -->
+
+  </div> <!-- Close accordion-content -->
+
+</div>
+
+<!-- Jony Ive Quote (Added back) -->
+	<div class="case-study-section" style="margin-left: -8px; margin-right: 30px;">
+    <div class="quote" style="margin-top: 2rem; text-align: left;">
+        "True innovation happens when you're willing to explore ideas that feel almost too ambitious or too different."
+        <div class="quote-attribution">- Jony Ive</div>
+    </div>
+</div>
+           
+     <div class="case-study-section" style="position: relative; left: -14px;">
+  
+            <h1 class="section-title"
+    style="font-size: var(--fs-h1); margin-bottom: clamp(-1rem, -3vw, -0.5rem);font-weight: 700;margin-left: 2px;">
+  SYNTHESIS
+</h1>
+
+  
+
+  <!-- 2x2 Grid (with vertical lines) -->
+  <p style="font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: .75rem; margin-right: -20px;  margin-left: 6px;">
+    With Bryan, Michele and Taylor in mind I translated these insights into solutions that addressed three key opportunity areas:
+  </p>
+
+ 
+
+
+<div class="insight-cards">
+  <!-- First card stays the same -->
+  <div class="insight-card" style="padding: 1rem 1rem 0.5rem 1.25rem; margin-left: 4px; background: var(--color-bg-tertiary);">
+  <h3 style="margin: 0 0 -1rem; font-size: 1.15rem;">Awareness & Communication</h3><br>
+    <p class="label">Insight</p>
+    <p style="margin-bottom: 2rem;">70% of students forget to complete evaluations.</p>
+
+    <p class="label">Opportunity</p>
+    <p>Add reminder mechanisms and clarify timelines.</p>
+  </div>
+
+  <!-- Second card with responsive margin -->
+  <div class="insight-card" style="padding: 1rem 1rem 0.5rem 1.25rem; background: var(--color-bg-tertiary); margin-left: 1.20rem;">
+  <h3 style="margin: 0 0 -1rem; font-size: 1.15rem;">Motivation & Incentives</h3><br>
+    <p class="label">Insight</p>
+    <p style="margin-bottom: 2rem;">Students felt their feedback didn't matter.</p>
+    <p class="label">Opportunity</p>
+    <p>Show how evaluations lead to real changes.</p>
+  </div>
+
+  <!-- Third card with responsive margin -->
+  <div class="insight-card" style="padding: 1rem 1rem 0.5rem 1.25rem; background: var(--color-bg-tertiary); margin-left: 2.75rem;">
+
+  <h3 style="margin: 0 0 -1rem; font-size: 1.15rem;">Design & User Experience</h3><br>
+    <p class="label">Insight</p>
+    <p style="margin-bottom: 2rem;">80% preferred navigating online information with their mobile phone</p>
+    <p class="label">Opportunity</p>
+    <p>Build a seamless, mobile-first experience.</p>
+  </div>
+</div>
+
+
+
+
+
+<!-- Effort–Impact Matrix -->
+  <div style="width: 100%; margin: 0 auto; margin-bottom: 3rem;margin-top: 3rem;">
+    <h3 style="font-size: 1.25rem; font-weight: 600; margin-left: 4px; margin-bottom: .25rem; color: var(--color-text-primary);">Prioritizing What to Build</h3>
+    <p style="color: var(--color-text-secondary); line-height: 1.6;margin-left: 4px; margin-bottom: -2.5rem;">
+      I created and facilitated an Effort–Impact Matrix workshop with my team to prioritize ideas based on user value and development feasibility, placing my calendar integration in the high-impact, medium-effort quadrant.
+    </p>
+          
+    </div>
+  </div>
+
+<div class="accordion" style="max-width: 1125px; margin-top: 2rem; margin-left: 4px; margin-right: 12px;">
+  <div class="accordion-header" 
+     tabindex="0"
+     role="button"
+     aria-expanded="false"
+     aria-controls="research-methods-content">
+  <span>Click To View Design Explorations & Constraints</span>
+  <span class="accordion-icon">▼</span>
+</div>
+        
+  <div class="accordion-content" id="design-exploration-content">
+    <div class="accordion-content-inner">
+      <!-- Effort-Impact Matrix -->
+      <h4 style="font-size: 1rem; font-weight: 600; margin: 2rem 0 1rem; margin-bottom: .75rem; margin-left: 0px; color: var(--color-text-primary);">Effort/Impact Matrix</h4>
+      <a
+  href="https://i.ibb.co/3ypLR3kg/Group-3413-1.png"
+  role="img"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Effort/Impact Matrix"
+  style="
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    position: relative;
+    background-image: url('https://i.ibb.co/yDY6fD7/Group-3413-2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0.5rem;
+    margin: 0 auto;
+    cursor: pointer;
+    aspect-ratio: 11/6;    /* Maintains the original 1100px:600px ratio */
+  "
+></a>
+      
+
+
+
+
+      <!-- Design Explorations -->
+      <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">Design Concepts</h3>
+      <p style="color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+        I created three distinct design concepts for the calendar integration feature, exploring different interaction patterns before settling on a dropdown-based approach that my usability testing proved reduced cognitive load. While my teammates focused on other areas, I championed the integration of testimonials with calendar functions to address both engagement barriers simultaneously.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <!-- The Campus Voice Card -->
+        <div>
+<div style="padding: 0.5rem 0;">
+            <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; margin-top: 0.5rem; color: var(--color-text-primary);">The Campus Voice</h4>
+            <p style="color: var(--color-text-secondary); line-height: 1.6;margin-bottom: 1rem;">This idea leveraged visual segmentation of evaluation periods (addressing confusion noted in interviews) to improve awareness for students like Michele, who struggled with timeline clarity.</p>
+          </div>
+         <a
+  href="https://example.com/your-target"
+  target="_blank"
+  rel="noopener noreferrer"
+  style="
+    display: block;
+    width: 60%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    cursor: pointer;
+  "
+  aria-label="Preview of the Campus Voice design"
+>
+  <img
+    src="https://i.ibb.co/xS2JXw0w/Group-3410.png"
+    alt="Mobile mockup of the Campus Voice screen"
+    style="width: 100%; height: auto; display: block;"
+  />
+</a>
+
+          <!-- Text Content -->
+          
+        </div>
+        
+        <!-- The Direct Impact Portal Card -->
+        <div>
+<div style="padding: 0.5rem 0;">
+            <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; margin-top: 0.5rem; color: var(--color-text-primary);">The Direct Impact Portal
+</h4>
+            <p style="color: var(--color-text-secondary);line-height: 1.6; margin-bottom: 1rem;">Here I explored whether directly showing completion rates could tap into social proof motivations identified for students like Bryan, potentially addressing the 'lack of perceived impact barrier.</p>
+          </div>
+          <a
+  href="https://i.ibb.co/RGN76v1h/Group-3409.png"
+  target="_blank"
+  rel="noopener noreferrer"
+  style="
+    display: block;
+    width: 60%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    cursor: pointer;
+  "
+  aria-label="Preview of the Direct Impact design"
+>
+  <img
+    src="https://i.ibb.co/XZn2t2gW/Group-3411.png"
+    alt="Mobile mockup of the The Direct Impact screen, with headline, stats, and calendar button."
+    style="
+      width: 100%;
+      height: auto;
+      display: block;
+    "
+  />
+</a>
+          
+        </div>
+      </div>
+      
+      <!-- Real-World Constraints -->
+     
+      <h4 style="font-size: 1rem; font-weight: 600; color: var(--color-text-primary);margin-top: 2.5rem;margin-left: 2px; margin-bottom: -1rem">Project Constraints & Design Adaptations</h4>
+    <table class="constraints-table">
+  <thead>
+    <tr>
+      <th scope="col">Constraint</th>
+      <th scope="col">Impact</th>
+      <th scope="col">Design Adaptation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row" data-label="Constraint">Privacy Requirements</td>
+      <td data-label="Impact">Couldn't display peer progress or public submission data</td>
+      <td data-label="Design Adaptation">Swapped in student and teacher testimonials and used student tone for messaging</td>
+    </tr>
+    <tr>
+      <td scope="row" data-label="Constraint">Calendar Integration</td>
+      <td data-label="Impact">ACC couldn't support every platform natively</td>
+      <td data-label="Design Adaptation">Defaulted to Google Calendar, offered manual .ics export for others</td>
+    </tr>
+  
+    <tr>
+      <td scope="row" data-label="Constraint">Team Design Direction</td>
+      <td data-label="Impact">Divided opinions on the emphasis of student testimonials vs. other features</td>
+      <td data-label="Design Adaptation">I facilitated a structured critique session linking design preferences to research findings, establishing an evidence‑based approach for resolving design disagreements</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+    <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: .25rem;margin-top: 40px; margin-left: 4px; color: var(--color-text-primary);">The Concept That Was Selected For Usability Testing</h3>
+    <p style="color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 2rem;margin-left: 4px;">
+      Deferring back to our matrix and incorporating stakeholder feedback, I proposed a hybrid, combining Campus Voice’s simplicity with real-world impact examples from the Portal—solving both the “forgetting” and “why it matters” barriers with a mobile first approach meet Bryan, Michele and Taylors needs.
+    </p>
+    
+     <a
+  href="https://i.ibb.co/4wr53mPt/Group-3412.png"
+  role="img"
+ target="_blank"
+  aria-label="First Designs for Usability Testing"
+  style="
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    height: 700px;
+    background-image: url('https://i.ibb.co/4wr53mPt/Group-3412.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0.5rem;
+    margin: 0 auto;
+    cursor: pointer;
+  "
+></a>
+       </div>
+    
+  </div>
+
+</div>
+<!-- Jony Ive Quote (Added back) -->
+	 <div class="case-study-section" style="margin: 2rem auto 1rem; margin-left: 0; margin-right: 30px; overflow: auto;">
+
+          <div class="quote" style="margin-top: 4rem; margin-left: -10px; margin-bottom: 0;">
+ 
+            "If the user can't use it, it doesn't work."
+            <div class="quote-attribution">- Susan Dray</div>
+        </div>
+</div>
+         
+
+ <!-- Usability Testing Section -->
+
+<div class="case-study-section">
+  
+            <h1 class="section-title"
+    style="font-size: var(--fs-h1); margin-bottom: clamp(-1rem, -3vw, -0.5rem);font-weight: 700;margin-left: -8px;">
+  VALIDATION
+</h1>
+<p style="color: var(--color-text-secondary); line-height: 1.6;margin-left: -8px; font-size: 0.95rem;">
+          We used Jakob Nielsen’s Usability Metrics Framework, specifically made to measure improvements in efficiency, accuracy, and completion.
+        </p>
+
+  
+    
+
+
+    <!-- Intro Paragraph -->
+<h4 style="font-size: 1rem; font-weight: 600; color: var(--color-text-primary);margin-top: 1.5rem;margin-left: -8px; margin-bottom: -1rem">Key Metrics from Usability Testing</h4>
+<!-- Results Cards Section -->
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin: 2rem 0 3rem -.5rem;">
+
+  <!-- Error Rate Card -->
+  <div style="border: 1px solid var(--color-border); border-radius: 0.75rem; padding: 1.5rem; background: var(--color-bg-tertiary);">
+    <div style="margin-bottom: 1rem;">
+    <span style="font-weight: 600; color: var(--color-text-primary); font-size: 1.125rem;">Error Rate</span>
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+  <!-- Test 1 group -->
+  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 0.5rem;">
+  <span style="color: var(--color-text-secondary); font-size: 1.125rem;">40.19%</span>
+  <span style="color: var(--color-text-secondary); font-size: 0.75rem; margin-top: 0.55rem; align-self: flex-start;">Test 1</span>
+</div>
+
+  <span style="color: #38a169; margin: 0 0.5rem;"></span>
+
+  <!-- Test 2 group -->
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <span style="font-weight: 700; font-size: 1.125rem; color: var(--color-text-primary);">25%</span>
+    <span style="color: var(--color-text-secondary); font-size: 0.75rem; margin-top: 0.55rem;">Test 2</span>
+  </div>
+</div>
+<p style="color: #38a169; font-size: 0.95rem; font-weight: 500;">15.2% improvement</p>
+<p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.5; margin-top: 0.75rem;">
+  Users completed evaluation guide tasks with significantly fewer errors, improving accuracy.
+</p>
+  </div>
+  
+  <!-- Time on Task Card -->
+  <div style="border: 1px solid var(--color-border); border-radius: 0.75rem; padding: 1.5rem;background: var(--color-bg-tertiary);">
+     <div style="margin-bottom: 1rem;">
+    <span style="font-weight: 600; color: var(--color-text-primary); font-size: 1.125rem;">Time on Tasks</span>
+    </div>
+    <div style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+  <!-- Test 1 group -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start; margin-right: 0.5rem;">
+    <span style="color: var(--color-text-secondary); font-size: 1.125rem;">1:17</span>
+    <span style="color: var(--color-text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">Test 1</span>
+  </div>
+  
+  <span style="color: #38a169; margin: 0.5rem 0.5rem 0;"></span>
+  
+  <!-- Test 2 group -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <span style="font-weight: 700; font-size: 1.125rem; color: var(--color-text-primary);">1:00</span>
+    <span style="color: var(--color-text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">Test 2</span>
+  </div>
+</div>
+<p style="color: #38a169; font-size: 0.95rem; font-weight: 500;">22.08% improvement</p>
+    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.5; margin-top: 0.75rem;">The streamlined interface reduced the average time needed to complete tasks from test one to test two.</p>
+  </div>
+  
+  <!-- Completion Rate Card -->
+  <div style="border: 1px solid var(--color-border); border-radius: 0.75rem; padding: 1.5rem;background: var(--color-bg-tertiary);">
+     <div style="margin-bottom: 1rem;">
+    <span style="font-weight: 600; color: var(--color-text-primary); font-size: 1.125rem;">Completion Rate</span>
+    </div>
+   <div style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+  <!-- Test 1 group -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start; margin-right: 0.5rem;">
+    <span style="color: var(--color-text-secondary); font-size: 1.125rem;">73%</span>
+    <span style="color: var(--color-text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">Test 1</span>
+  </div>
+  
+  <span style="color: #38a169; margin: 0.5rem 0.5rem 0;"></span>
+  
+  <!-- Test 2 group -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <span style="font-weight: 700; font-size: 1.125rem; color: var(--color-text-primary);">96%</span>
+    <span style="color: var(--color-text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">Test 2</span>
+  </div>
+</div>
+<p style="color: #38a169; font-size: 0.95rem; font-weight: 500;">23% improvement</p>
+    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.5; margin-top: 0.75rem;">Users relied less on the "contact us" section to complete task showing imrpovement in how information is being conveyed.</p>
+  </div>
+  
+  <!-- Number of Clicks Card -->
+  <div style="border: 1px solid var(--color-border); border-radius: 0.75rem; padding: 1.5rem;background: var(--color-bg-tertiary);">
+     <div style="margin-bottom: 1rem;">
+    <span style="font-weight: 600; color: var(--color-text-primary); font-size: 1.125rem;">Number of Clicks</span>
+    </div>
+    <div style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+  <!-- Test 1 group -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start; margin-right: 0.5rem;">
+    <span style="color: var(--color-text-secondary); font-size: 1.125rem;">102</span>
+    <span style="color: var(--color-text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">Test 1</span>
+  </div>
+  
+  <span style="color: #38a169; margin: 0.5rem 0.5rem 0;"></span>
+  
+  <!-- Test 2 group -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <span style="font-weight: 700; font-size: 1.125rem; color: var(--color-text-primary);">72</span>
+    <span style="color: var(--color-text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">Test 2</span>
+  </div>
+</div>
+<p style="color: #38a169; font-size: 0.95rem; font-weight: 500;">29.41% improvement</p>
+    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.5; margin-top: 0.75rem;">The redesigned navigation reduced the number of interactions needed to complete tasks.</p>
+  </div>
+</div>
+
+
+<!-- Detailed Calendar Feature Insights -->
+<div class="accordion" style="max-width: 1125px; margin-left: -8px; margin-top: -1rem">
+  <div class="accordion-header">
+
+
+    <span>Calendar Feature Usability Insights</span>
+    <span class="accordion-icon">▼</span>
+  </div>
+  <div class="accordion-content">
+    <div class="accordion-content-inner">
+
+
+
+
+
+<div style="margin-bottom: -.5rem;">
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">Usability Test Setup Overviews</h3>
+ 
+  <ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Participants:</strong> 10 students (5 per round) from diverse programs, ages 25-53
+    </li>
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Format:</strong> Mix of remote and in-person moderated sessions
+    </li>
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Duration:</strong> 15-30 minutes per session
+    </li>
+
+    <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Documentation:</strong> All sessions recorded for observation
+    </li>
+<li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+      <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+      <strong>Gender:</strong> 60% female, 40% male
+    </li>
+  </ul>
+</div>
+
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">Tools & Tasks</h3>
+<ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Platform:</strong> Interactive Figma prototypes
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Capture method:</strong> Zoom for screen sharing and audio recording
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Documentation:</strong> Notes logged in Notion
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Core tasks:</strong> Navigation to evaluation pages, using "Add to Calendar" feature, exploring content structure
+  </li>
+</ul>
+
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">What We Measured</h3>
+<ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Task completion rate:</strong> % of participants who successfully completed tasks
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Error rate:</strong> Frequency of mistakes or incorrect paths
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Time on task:</strong> Efficiency of task completion
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Interaction cost:</strong> Number of clicks needed to complete actions
+  </li>
+</ul>
+
+<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; color: var(--color-text-primary);">Primary Objectives</h3>
+<ul style="list-style: none; padding-left: 0; color: var(--color-text-secondary);">
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Usability focus:</strong> Navigation ease, content clarity, and task flow efficiency
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Feature testing:</strong> Special attention to "Add to Calendar" and "Start My Evaluation" 
+  </li>
+  <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; line-height: 1.6;">
+    <span style="position: absolute; left: 0; color: var(--color-text-secondary);">•</span>
+    <strong>Impact:</strong> Testing insights directly shaped design iterations across layout, hierarchy, and labeling
+  </li>
+</ul>
+
+
+
+      <h4 style="margin-top:0; font-size:1rem; font-weight:600;">Observations</h4>
+      <ul style="padding-left:1.2rem; line-height:1.6; color:var(--color-text-secondary);">
+        <li><strong>Test 1:</strong> Participants frequently went to the FAQ sections to resolve the tasks.</li>
+        <li><strong>Test 2:</strong> Overall participants where able to navigate the interface with more ease.</li>
+      </ul>
+
+      <h4 style="margin-top:1.5rem; font-size:1rem; font-weight:600;">Participant Quotes</h4>
+      <ul style="padding-left:1.2rem; line-height:1.6; color:var(--color-text-secondary);">
+       <li> “I thought I could just click add to calendar and the it would know my dates.”<br>
+        <footer style="font-size:0.9rem; color:var(--color-text-primary);">– Participant 3, Test 1</li></footer>
+      
+      <li>
+        “I love this, If I could just have a way to do this for assignments, that would be awesome.”<br>
+        <footer style="font-size:0.9rem; color:var(--color-text-primary);">– Participant 2, Test 2</li></footer>
+     </ul>
+
+      <h4 style="margin-top:1.5rem; margin-bottom:-1rem;font-size:1rem; font-weight:600;">Key Metrics</h4>
+      <table class="constraints-table">
+  <thead>
+    <tr>
+      <th scope="col">Metric</th>
+      <th scope="col">Round 1</th>
+      <th scope="col">Round 2</th>
+      <th scope="col">Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row" data-label="Metric">Avg. calendar‑task errors</td>
+      <td data-label="Round 1">2.4 errors/user</td>
+      <td data-label="Round 2">0.6 errors/user</td>
+      <td data-label="Change">↓ 75%</td>
+    </tr>
+    <tr>
+      <td scope="row" data-label="Metric">Success rate</td>
+      <td data-label="Round 1">4/5 passed</td>
+      <td data-label="Round 2">5/5 passed</td>
+      <td data-label="Change">+ 20 pp</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 style="margin-top:1.5rem; margin-bottom:-1rem; font-size:1rem; font-weight:600;">Insight To-Feature Mapping</h4>
+      <table class="constraints-table">
+  <thead>
+    <tr>
+      <th scope="col">Research Insight</th>
+      <th scope="col">Design Response</th>
+      <th scope="col">Success Metric</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td data-label="Research Insight">70% forget to complete evaluations</td>
+      <td data-label="Design Response">Calendar integration with customized reminders</td>
+      <td data-label="Success Metric">Reduced no‑shows (measured by 23% completion rate increase)</td>
+    </tr>
+    <tr>
+      <td data-label="Research Insight">Students don’t see impact of feedback</td>
+      <td data-label="Design Response">Faculty testimonials and “changes made” showcase</td>
+      <td data-label="Success Metric">Improved perceived value (measured by positive sentiment in testing)</td>
+    </tr>
+    <tr>
+      <td data-label="Research Insight">80% prefer mobile completion</td>
+      <td data-label="Design Response">Mobile‑first design with thumb‑friendly UI patterns</td>
+      <td data-label="Success Metric">Faster completion time (22% reduction in task time)</td>
+    </tr>
+    <tr>
+      <td data-label="Research Insight">Confusion about evaluation timeline</td>
+      <td data-label="Design Response">Course‑specific evaluation window indicator</td>
+      <td data-label="Success Metric">Lower error rate (15.2% fewer errors in timeline‑related tasks)</td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<h3 style="font-size: 1.25rem; font-weight: 600;margin-left: -8px; margin-bottom: .25rem; color: var(--color-text-primary);">Between testing rounds, I implemented several key improvements to the features I owned:</h3>
+ 
+<ul style="padding-left: 1.05rem; color: var(--color-text-secondary); margin-left: -8px; line-height: 1.6;margin-bottom: 2rem;">
+           
+          <li>Enhanced the prominence of student and faculty testimonials to better communicate impact</li>
+<li>Simplified the calendar integration flow based on round 1 feedback</li>
+<li>Added clearer visual indicators for alternative feedback methods</li>
+        </ul>
+
+       </div>
+
+
+
+
+
+<!-- Final Screens Section -->
+  <div class="case-study-section"
+     id="final-screens"
+     style="margin-top: 4rem; margin-left: -2px;">
+  
+            <h1 class="section-title"
+    style="font-size: var(--fs-h1); margin-bottom: clamp(-1rem, -3vw, -0.5rem);font-weight: 700;margin-left: -8px;">
+  DESIGN SOLUTIONS
+</h1>
+<p style="color: var(--color-text-secondary);margin-left: -6px; margin-bottom: -1rem; line-height: 1.6; font-size: 0.95rem;">
+              Below are the two main mobile screen flows for the course evaluation guide experience.
+        </p>
+
+      <!-- Flow 1: take the course evaluation -->
+<div style="margin-top: 2rem;">
+  <h3 style="font-size: 1.25rem; font-weight: 600;margin-left: -6px; margin-bottom: -.25rem; color: var(--color-text-primary);">Flow 1 - "Start My evaluation"</h3>
+  
+
+<div style="
+  width: min(1500px, calc(100vw - 4rem));
+  margin: 2rem 0;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+">
+  <img
+    src="https://i.ibb.co/cSkk1V6D/Group-3178.png"
+    alt="Start My Evaluation"
+    style="
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    "
+  >
+</div>
+
+
+<section class="screen-flow large-breakpoint">
+  <div class="flow-diagram">
+    <figure class="flow-step">
+      <figcaption><strong>1.</strong> User lands on the welcome page and clicks the prominent "Start My Evaluation" button</figcaption>
+    </figure>
+    <figure class="flow-step">
+
+      <figcaption><strong>2.</strong> System presents a secure login interface</figcaption>
+    </figure>
+    <figure class="flow-step">
+      <figcaption><strong>3.</strong> User enters their student credentials (ID and password) and selects "Sign In"</figcaption>
+    </figure>
+    <figure class="flow-step">
+      <figcaption><strong>4.</strong> Upon successful authentication, user views their personalized Class Climate dashboard displaying all current semester evaluations (both pending and completed), then selects "Continue to Evaluation"</figcaption>
+    </figure>
+<figure class="flow-step">
+      <figcaption><strong>5.</strong> User begins the interactive evaluation process</figcaption>
+    </figure>
+<figure class="flow-step">
+      <figcaption><strong>6.</strong> After submitting all responses, user receives a confirmation screen with options to either return to their Class Climate dashboard or exit the system</figcaption>
+    </figure>
+  </div>
+
+<ul class="flow-bullets" style="
+  max-width: 90%;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  text-align: left;
+">
+    <li><strong>1.</strong> User lands on the welcome page and clicks the prominent "Start My Evaluation" button</li>
+    <li><strong>2.</strong> System presents a secure login interface</li>
+    <li><strong>3.</strong> User enters their student credentials (ID and password) and selects "Sign In"</li>
+    <li><strong>4.</strong> Google Calendar opens showing the evaluation deadline with a 72-hour reminder (customizable notification)</li>
+<li><strong>5.</strong> User begins the interactive evaluation process</li>
+<li><strong>6.</strong> After submitting all responses, user receives a confirmation screen with options to either return to their Class Climate dashboard or exit the system</li>
+  </ul>
+</section>
+
+
+
+
+<div style="border-left: 4px solid #7B52B5; padding-left: 1rem; margin: 1.5rem 0; margin-left: -6px;">
+  <h4 style="font-weight: 600; margin-top: 60px; color: var(--color-text-primary);">My Design Decision: Calendar Integration</h4>
+  <p style="color: var(--color-text-secondary); line-height: 1.6;">
+        When designing the calendar feature, I made the critical decision to implement a dropdown selection rather than a date picker. My design choice was primarily driven by mobile space constraints, as my research showed 80% of students preferred mobile completion, this would help out students like Taylor. This compact solution not only saved valuable screen real estate but also simplified how students identified their evaluation windows by course length rather than arbitrary dates.
+  </p>
+</div>
+
+
+
+
+
+
+
+
+<!-- Flow 2: Add to Calendar with full-bleed layout -->
+<div style="
+   width: min(1500px, calc(100vw - 4rem));
+  margin: 2rem 0;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+">
+  <img
+    src="https://i.ibb.co/svCcGvTj/Group-3171.png"
+    alt="Calendar integration screens"
+    style="
+      display: block;
+      width: 75%;
+      height: auto;
+      margin: 0 auto;
+    "
+  >
+</div>
+</div>
+
+
+
+
+
+
+
+<!-- replace your current flow container with this -->
+<section class="screen-flow">
+  <div class="flow-diagram">
+    <figure class="flow-step">
+      <figcaption><strong>1.</strong> User taps the 'View Dates' button to see available evaluation periods.</figcaption>
+    </figure>
+    <figure class="flow-step">
+
+      <figcaption><strong>2.</strong> User selects the date range that matches their specific course length and schedule. After selection, the dropdown automatically closes and displays the chosen evaluation period</figcaption>
+    </figure>
+    <figure class="flow-step">
+      <figcaption><strong>3.</strong> After selection, the dropdown automatically closes and displays the chosen evaluation period</figcaption>
+    </figure>
+    <figure class="flow-step">
+      <figcaption><strong>4.</strong> Google Calendar opens showing the evaluation deadline with a 72-hour reminder</figcaption>
+    </figure>
+  </div>
+
+<ul class="flow-bullets" style="
+  max-width: 90%;
+  margin: 0 auto;
+margin-bottom: 2rem;
+  padding-left: 1.5rem;
+  text-align: left;
+">
+    <li><strong>1.</strong> User taps the 'View Dates' button to see available evaluation periods</li>
+    <li><strong>2.</strong> User selects the date range that matches their specific course length and schedule. After selection, the dropdown automatically closes and displays the chosen evaluation period.</li>
+    <li><strong>3.</strong> User taps the 'Add to Google Calendar' button, which immediately adds the event</li>
+    <li><strong>4.</strong> Google Calendar opens showing the evaluation deadline with a 72-hour reminder (customizable notification)</li>
+  </ul>
+</section>
+
+
+<h1 class="section-title"
+    style="font-size: var(--fs-h1);margin-top:5rem; margin-bottom: clamp(-1rem, -3vw, -0.5rem);font-weight: 700;margin-left: -8px;">
+  Before & After Screens
+</h1>
+<p style="color: var(--color-text-secondary);margin-left: -6px; margin-bottom: -4rem; line-height: 1.6; font-size: 0.95rem;">
+              Below are the two main mobile screen flows for the course evaluation guide experience.
+        </p>
+
+
+
+
+
+<section class="concept-section" style="padding-left: 0; margin-left: -.40rem; max-width: 110%;">
+  <h3 class="concept-heading" style="text-align: left; margin-left: 0;">
+    What students first above the fold
+  </h3>
+  <div class="layout-container" style="max-width: 1300px; margin-left: 0; width: 105%;">
+    <!-- Keep the text group with cards -->
+    <div class="text-group" style="width: 100%;">
+      <div class="text-item" style="width: 100%;">
+        <h4>Before</h4>
+        <ul class="analysis-list">
+          <li>Promotes gift card incentives</li>
+          <li>Confusing user journey with no guidance or contextual framing</li>
+          <li>Lacks clear explanation of how and why to complete evaluations</li>
+        </ul>
+      </div>
+      <div class="text-item" style="width: 100%;">
+         <h4>After</h4>
+         <ul class="analysis-list">
+          <li>Opens with a focused message on the value of evaluations</li>
+          <li>Features a carousel with how-to videos and student testimonials</li>
+          <li>Includes a prominent CTA button that links directly to the evaluation portal</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Replace the placeholder with an actual image with responsive sizing -->
+    <div class="image-group">
+      <img 
+        src="https://i.ibb.co/dw7JhWtL/Group-3426.png" 
+        alt="Before and after comparison of the course evaluation interface"
+        style="width: 100%; max-width: 700px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 0 auto; display: block;"
+      >
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="concept-section" style="padding-left: 0; margin-left: -.4rem; max-width: 110%;">
+  <h3 class="concept-heading" style="text-align: left; margin-left: 0;">
+    Navigating the feedback window
+  </h3>
+  <div class="layout-container" style="max-width: 1300px; margin-left: 0; width: 105%;">
+    <!-- Keep the text group with cards -->
+    <div class="text-group" style="width: 100%;">
+      <div class="text-item" style="width: 100%;">
+        <h4>Before</h4>
+        <ul class="analysis-list">
+          <li>Displays dates in a non-intuitive, cluttered format</li>
+          <li>Lacks clear markers for evaluation windows and course timeline</li>
+          <li>Creates friction in tracking important academic deadlines</li>
+        </ul>
+      </div>
+      <div class="text-item" style="width: 100%;">
+         <h4>After</h4>
+         <ul class="analysis-list">
+          <li>Features a drop-down menu that sorts evaluation dates chronologically</li>
+          <li>Presents individiualized course evaluation window for course length</li>
+          <li>Seamlessly integrates into the platform's navigation for a unified experience</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Replace the placeholder with an actual image with responsive sizing -->
+    <div class="image-group">
+      <img 
+        src="https://i.ibb.co/BHfqyLCx/Group-3425-1.png" 
+        alt="Before and after comparison of the course evaluation interface"
+        style="width: 100%; max-width: 700px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 0 auto; display: block;"
+      >
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+ 
+       
+
+        <!-- Reflections Section -->
+        <div class="case-study-section" style="margin-left: -1rem; padding-left: 12px; max-width: 110%;">
+  
+    <h1 class="section-title"
+    style="font-size: var(--fs-h1); margin-bottom: clamp(-1rem, -3vw, -0.5rem); font-weight: 700; margin-left: -4px;">
+  REFLECTIONS
+</h1>
+  
+  <p style="font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: -.25rem; margin-left: 1px;">
+    This project fundamentally changed my approach to educational UX design. Coming from a background in consumer apps, I had to shift my thinking about motivation and engagement in an academic context.
+  </p>
+  
+  <div style="display: grid; grid-template-columns: margin-top: .25 rem; repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+    <div style="background: var(--color-bg-tertiary); padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: .25rem; color: var(--color-text-primary);">Lessons in Decision Design</h3>
+      <p style="color: var(--color-text-secondary); line-height: 1.6;">
+        Working on the calendar feature transformed my approach from chasing aesthetic perfection to systematically reducing decision complexity for users, particularly after seeing how students struggled with identifying their evaluation windows rather than with the interface itself. This shift has made me a more strategic designer who prioritizes cognitive simplicity in all my work. The calendar integration also revealed how system boundaries (like connecting evaluation platforms with personal calendars) are critical trust-building opportunities where users form lasting impressions about reliability, fundamentally changing how I approach integration points in my designs.
+      </p>
+    </div>
+    
+    <div style="background: var(--color-bg-tertiary); padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: .25rem; color: var(--color-text-primary);">The Impact of Continuous &  Open Communication</h3>
+      <p style="color: var(--color-text-secondary); line-height: 1.6;">
+        The most challenging aspect of this project was changing my mindset about how to communicate with my teammates and stakeholder. Initially I thought small updates here and there would work, but quickly found out during our research planning that we needed to really "over communicate" ideas, questions, concerns and even smalls wins. Developing the ability to "speak the language" of stakholders was brought to light for me, particularly in translating user research into compelling narratives.
+      </p>
+    </div>
+    
+    <div style="background: var(--color-bg-tertiary); padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: .25rem; color: var(--color-text-primary);">Balancing Academic & Real-World Contexts</h3>
+      <p style="color: var(--color-text-secondary); line-height: 1.6;">
+        Working on a capstone project that wouldn't be immediately implemented taught me how to design with both educational and professional standards in mind. Though our solutions wouldn't go live, we approached every decision as if it would, consulting with real stakeholders and gathering authentic user feedback. This dual perspective enhanced my ability to balance academic rigor with practical application—a skill that's proven valuable as I've transitioned to professional UX work.
+      </p>
+    </div>
+  </div>
+  
+  <div style="border-left: 4px solid #7B52B5;
+            margin-top: 2rem;
+            padding-left: 1rem;">
+  <h3 style="font-size: 1.25rem;
+             font-weight: 600;
+             margin-bottom: .5rem;
+             color: var(--color-text-primary);">Looking Forward</h3>
+     <p style="color: var(--color-text-secondary);
+            line-height: 1.6;">
+      The Teaching & Learning Excellence Division expressed interest in incorporating elements of our design into their future system upgrades, particularly the calendar integration and impact visualization features. If this where ever to come to fruition I would need to make sure to create:    </p>
+<ul style="color: var(--color-text-secondary); line-height: 1.6; padding-left: 1.2rem; margin-top: 0.5rem;">
+    <li>Longitudinal A/B Testing to measure which impact stories and testimonials drive highest conversion</li>
+    <li>Accessibility Audit to ensure screen reader compatibility for all interactive elements</li>
+  </ul>
+  </div>
+</div>
+
+        <!-- Next Project Navigation -->
+        <div style="text-align: center; margin-top: 4rem; margin-bottom: 2rem;">
+            <a href="index.html#work" style="display: inline-flex; align-items: center; background-color: var(--color-text-accent); color: var(--color-bg-secondary); padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                <span style="margin-right: 0.5rem;">←</span>
+                Back to Projects
+            </a>
+        </div>
+    </section>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const html = document.documentElement;
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    
+    // Initialize theme
+    function setTheme(theme) {
+        html.className = theme;
+        localStorage.setItem('theme', theme);
+        if (themeToggleBtn) {
+            themeToggleBtn.textContent = theme === 'dark-theme' ? '☀️' : '🌙';
+        }
+    
+    }
+     // Set initial theme from localStorage or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light-theme';
+    setTheme(savedTheme);
+    
+    // Toggle handler
+    themeToggleBtn.addEventListener('click', function() {
+        const currentTheme = html.className;
+        const newTheme = currentTheme === 'dark-theme' ? 'light-theme' : 'dark-theme';
+        setTheme(newTheme);
+        console.log('Theme toggled to:', newTheme); // For debugging
+    });
+});
+        // Mobile Menu Functionality
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        const btn = document.querySelector('.hamburger');
+const menu = document.querySelector('.mobile-menu');
+
+btn.addEventListener('click', () => {
+  const isOpen = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!isOpen));
+  btn.classList.toggle('active');
+  menu.classList.toggle('active');
+});
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && 
+                !hamburger.contains(e.target) &&
+                mobileMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Accordion Functionality - Updated with DOMContentLoaded to ensure it works
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeader = document.getElementById('research-methods-header');
+            const accordionContent = document.getElementById('research-methods-content');
+            
+            if (accordionHeader && accordionContent) {
+                accordionHeader.addEventListener('click', function() {
+                    this.classList.toggle('accordion-active');
+                    
+                    if (accordionContent.style.maxHeight) {
+                        accordionContent.style.maxHeight = null;
+                    } else {
+                        accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
+                    }
+                });
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+// Header scroll behavior
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('header');
+    let lastScrollTop = 0;
+    const scrollThreshold = 10; // Minimum scroll amount to trigger header show/hide
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // If we're scrolling down and not at the top
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            header.classList.add('header-hidden');
+        } 
+        // If we're scrolling up
+        else if (scrollTop < lastScrollTop - scrollThreshold) {
+            header.classList.remove('header-hidden');
+        }
+        
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile bounce
+    }, { passive: true });
+});
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to handle accordion open/close
+  function toggleAccordion(header) {
+	const isExpanded = header.getAttribute('aria-expanded') === 'true';
+  header.setAttribute('aria-expanded', String(!isExpanded));
+    header.classList.toggle('accordion-active');
+    const content = header.nextElementSibling;
+    
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+      content.classList.remove('active');
+    } else {
+      content.classList.add('active');
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  }
+  
+  // Function to update heights of open accordions
+  function updateAccordionHeights() {
+    document.querySelectorAll('.accordion-content.active').forEach(content => {
+      content.style.maxHeight = content.scrollHeight + "px";
+    });
+  }
+  
+  // Set up click handlers
+  const headers = document.querySelectorAll('.accordion-header');
+  headers.forEach(header => {
+    header.addEventListener('click', function() {
+      toggleAccordion(this);
+    });
+  });
+  document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleAccordion(header);
+    }
+  });
+});
+  // Update heights on window resize
+  window.addEventListener('resize', updateAccordionHeights);
+  
+  // Update heights when images load (which can change content height)
+  window.addEventListener('load', updateAccordionHeights);
+  
+  // Optional: Listen for DOM changes that might affect content height
+  if (typeof MutationObserver !== 'undefined') {
+    const observer = new MutationObserver(updateAccordionHeights);
+    document.querySelectorAll('.accordion-content').forEach(content => {
+      observer.observe(content, { 
+        childList: true, 
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+      });
+    });
+  }
+});
+
+    </script>
+</body>
+</html>
